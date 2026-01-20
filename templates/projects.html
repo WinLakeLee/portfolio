@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section container" style="padding-top: 120px;">
+    <h1>전체 프로젝트 (All Projects)</h1>
+    <div class="category-section" style="margin-bottom: 6rem;">
+        <h2 style="color: var(--accent-color); margin-bottom: 2rem;">팀 프로젝트 (Team Projects)</h2>
+        <div class="grid">
+            {% for project in projects if project.category == 'Team Project' %}
+            <a href="{{ url_for('project_detail', project_id=project.id) }}" class="card">
+                <div class="card-type">{{ project.type }}</div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.summary }}</p>
+                <div class="tech-tags">
+                    {% for tech in project.tech_list %}
+                    <span class="tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="category-section">
+        <h2 style="color: var(--accent-color); margin-bottom: 2rem;">개인 프로젝트 (Personal Work)</h2>
+        <div class="grid">
+            {% for project in projects if project.category == 'Personal Work' %}
+            <a href="{{ url_for('project_detail', project_id=project.id) }}" class="card">
+                <div class="card-type">{{ project.type }}</div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.summary }}</p>
+                <div class="tech-tags">
+                    {% for tech in project.tech_list %}
+                    <span class="tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

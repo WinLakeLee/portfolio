@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="project-header">
+    <div class="container">
+        <span class="card-type">{{ project.type }}</span>
+        <h1>{{ project.title }}</h1>
+        <p style="font-size: 1.5rem; color: #94a3b8; margin-top: 1rem;">{{ project.subtitle }}</p>
+
+        {% if project.github_links %}
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+            {% for link in project.github_links %}
+            <a href="{{ link.url }}" target="_blank" class="btn"
+                style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                {{ link.name }} ↗
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="detail-content">
+    {% if project.role_summary %}
+    <div class="role-summary-box">
+        <div class="role-summary-title">핵심 역할 및 담당 (Core Role)</div>
+        <p style="font-size: 1.1rem; color: #f1f5f9;">{{ project.role_summary }}</p>
+    </div>
+    {% endif %}
+
+    {% if project.contribution_points %}
+    <section style="margin-top: 4rem;">
+        <h2>주요 기여 사항 (Key Contributions)</h2>
+        <div class="contribution-grid">
+            {% for item in project.contribution_points %}
+            <div class="contribution-card">
+                <div class="contribution-title">{{ item.title }}</div>
+                <p style="color: #94a3b8; font-size: 0.95rem;">{{ item.desc }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <section style="margin-top: 4rem;">
+        <h2>프로젝트 소개 (About Project)</h2>
+        <div style="white-space: pre-line; margin-top: 1.5rem; color: #cbd5e1; line-height: 1.8;">
+            {{ project.details }}
+        </div>
+    </section>
+
+    {% if project.role or project.lessons or project.improvements %}
+    <section style="margin-top: 4rem;">
+        <section style="margin-top: 4rem;">
+            <h2>회고 (Retrospective)</h2>
+            <div class="grid" style="grid-template-columns: 1fr; gap: 1.5rem;">
+                {% if project.role %}
+                <div class="card"
+                    style="cursor: default; background: rgba(56, 189, 248, 0.05); border-color: var(--accent-color);">
+                    <h3 style="color: var(--accent-color); font-size: 1.2rem;">역할 정의 (My Role)</h3>
+                    <p style="color: #cbd5e1;">{{ project.role }}</p>
+                </div>
+                {% endif %}
+
+                {% if project.lessons %}
+                <div class="card" style="cursor: default;">
+                    <h3 style="color: #818cf8; font-size: 1.2rem;">배운 점 (Key Learnings)</h3>
+                    <p style="color: #cbd5e1;">{{ project.lessons }}</p>
+                </div>
+                {% endif %}
+
+                {% if project.improvements %}
+                <div class="card" style="cursor: default;">
+                    <h3 style="color: #f472b6; font-size: 1.2rem;">개선할 점 (Improvements)</h3>
+                    <p style="color: #cbd5e1;">{{ project.improvements }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+        {% endif %}
+
+        <section style="margin-top: 4rem;">
+            <h2>주요 기능 (Key Features)</h2>
+            <div class="feature-list">
+                {% for feature in project.features %}
+                <div class="feature-item">
+                    <h3>{{ feature.name }}</h3>
+                    <p style="color: #94a3b8; margin-top: 0.5rem;">{{ feature.desc }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section style="margin-top: 4rem;">
+            <h2>기술 스택 (Technical Stack)</h2>
+            <div class="tech-stack-grid">
+                {% for category, techs in project.tech_stack.items() %}
+                <div class="tech-category">
+                    <h4>{{ category }}</h4>
+                    <ul>
+                        {% for tech in techs %}
+                        <li>{{ tech }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <div style="margin-top: 4rem; text-align: center;">
+            <a href="{{ url_for('projects_list') }}" class="btn btn-primary">목록으로 돌아가기</a>
+        </div>
+</div>
+{% endblock %}
