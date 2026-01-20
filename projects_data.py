@@ -270,6 +270,57 @@ USER_PROFILE = {
             "details": ["AI를 활용한 웹 플랫폼 구축 과정 수료"],
         },
     ],
+    "tech_stack_summary": {
+        "Languages": [
+            {"name": "Python", "icon": "fa-brands fa-python", "highlight": True},
+            {"name": "Java", "icon": "fa-brands fa-java", "highlight": True},
+            {"name": "JavaScript", "icon": "fa-brands fa-js", "highlight": True},
+            {"name": "SQL", "icon": "fa-solid fa-database", "highlight": False},
+            {"name": "HTML/CSS", "icon": "fa-brands fa-html5", "highlight": False},
+        ],
+        "Frontend & Mobile": [
+            {"name": "React", "icon": "fa-brands fa-react", "highlight": True},
+            {"name": "Vite", "icon": "fa-solid fa-bolt", "highlight": False},
+            {"name": "Redux", "icon": "fa-solid fa-layer-group", "highlight": False},
+            {"name": "Bootstrap", "icon": "fa-brands fa-bootstrap", "highlight": False},
+            {
+                "name": "Leaflet",
+                "icon": "fa-solid fa-map-location-dot",
+                "highlight": False,
+            },
+        ],
+        "Backend & Database": [
+            {"name": "Flask", "icon": "fa-solid fa-flask", "highlight": True},
+            {"name": "Spring Boot", "icon": "fa-solid fa-leaf", "highlight": True},
+            {"name": "SQLAlchemy", "icon": "fa-solid fa-link", "highlight": False},
+            {"name": "JPA", "icon": "fa-solid fa-link", "highlight": False},
+            {"name": "MySQL", "icon": "fa-solid fa-server", "highlight": False},
+            {
+                "name": "JWT / OAuth2",
+                "icon": "fa-solid fa-shield-halved",
+                "highlight": False,
+            },
+        ],
+        "AI / ML & Vision": [
+            {
+                "name": "PyTorch",
+                "icon": "fa-solid fa-fire-flame-curved",
+                "highlight": True,
+            },
+            {"name": "YOLO", "icon": "fa-solid fa-eye", "highlight": False},
+            {"name": "PatchCore", "icon": "fa-solid fa-microscope", "highlight": False},
+            {"name": "Anomalib", "icon": "fa-solid fa-brain", "highlight": False},
+            {"name": "OpenCV", "icon": "fa-solid fa-camera", "highlight": False},
+        ],
+        "Infrastructure & Tools": [
+            {"name": "Docker", "icon": "fa-brands fa-docker", "highlight": True},
+            {"name": "AWS", "icon": "fa-brands fa-aws", "highlight": False},
+            {"name": "Git", "icon": "fa-brands fa-git-alt", "highlight": False},
+            {"name": "MQTT", "icon": "fa-solid fa-tower-broadcast", "highlight": False},
+            {"name": "Gradle", "icon": "fa-solid fa-hammer", "highlight": False},
+            {"name": "OSRM", "icon": "fa-solid fa-route", "highlight": False},
+        ],
+    },
 }
 
 

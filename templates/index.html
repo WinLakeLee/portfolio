@@ -80,57 +80,19 @@
         <h3 style="border-left: 4px solid var(--accent-color); padding-left: 1rem; margin-bottom: 2rem;">Technical Stack
         </h3>
         <div class="tech-grid">
+            {% for category, techs in profile.tech_stack_summary.items() %}
             <div class="tech-group">
-                <h4>Languages</h4>
+                <h4>{{ category }}</h4>
                 <div class="tech-tags">
-                    <span class="tag highlight">Python</span>
-                    <span class="tag highlight">Java</span>
-                    <span class="tag highlight">JavaScript</span>
-                    <span class="tag">SQL</span>
-                    <span class="tag">HTML/CSS</span>
+                    {% for tech in techs %}
+                    <span class="tag {% if tech.highlight %}highlight{% endif %}">
+                        <i class="{{ tech.icon }}"></i>
+                        {{ tech.name }}
+                    </span>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="tech-group">
-                <h4>Frontend & Mobile</h4>
-                <div class="tech-tags">
-                    <span class="tag highlight">React</span>
-                    <span class="tag">Vite</span>
-                    <span class="tag">Redux</span>
-                    <span class="tag">Bootstrap</span>
-                    <span class="tag">Leaflet</span>
-                </div>
-            </div>
-            <div class="tech-group">
-                <h4>Backend & Database</h4>
-                <div class="tech-tags">
-                    <span class="tag highlight">Flask</span>
-                    <span class="tag highlight">Spring Boot</span>
-                    <span class="tag">SQLAlchemy</span>
-                    <span class="tag">JPA</span>
-                    <span class="tag">MySQL</span>
-                    <span class="tag">JWT / OAuth2</span>
-                </div>
-            </div>
-            <div class="tech-group">
-                <h4>AI / ML & Vision</h4>
-                <div class="tech-tags">
-                    <span class="tag highlight">PyTorch</span>
-                    <span class="tag">YOLO (v8/v11)</span>
-                    <span class="tag">PatchCore</span>
-                    <span class="tag">Anomalib</span>
-                    <span class="tag">OpenCV</span>
-                </div>
-            </div>
-            <div class="tech-group">
-                <h4>Infrastructure & Tools</h4>
-                <div class="tech-tags">
-                    <span class="tag">Docker</span>
-                    <span class="tag">MQTT</span>
-                    <span class="tag">Git</span>
-                    <span class="tag">Gradle</span>
-                    <span class="tag">OSRM</span>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 

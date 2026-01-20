@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -15,7 +17,10 @@
         <div class="nav-brand">
             <a href="{{ url_for('home') }}">{{ developer_name }}.</a>
         </div>
-        <div class="nav-links">
+        <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
             <a href="{{ url_for('home') }}">홈 (Home)</a>
             <a href="{{ url_for('projects_list') }}">프로젝트 (Projects)</a>
             <a href="{{ github_url }}" target="_blank">GitHub</a>
@@ -30,6 +35,20 @@
         <p>&copy; 2024 {{ developer_name }}. All rights reserved.</p>
     </footer>
 
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = navToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.replace('fa-bars', 'fa-xmark');
+            } else {
+                icon.classList.replace('fa-xmark', 'fa-bars');
+            }
+        });
+    </script>
     {% block scripts %}{% endblock %}
 </body>
 
