@@ -21,8 +21,8 @@
             <i class="fa-solid fa-bars"></i>
         </button>
         <div class="nav-links" id="navLinks">
-            <a href="{{ url_for('home') }}">홈 (Home)</a>
-            <a href="{{ url_for('projects_list') }}">프로젝트 (Projects)</a>
+            <a href="{{ url_for('home') }}#home" id="nav-home">홈 (Home)</a>
+            <a href="{{ url_for('home') }}#projects" id="nav-projects">프로젝트 (Projects)</a>
             <a href="{{ github_url }}" target="_blank">GitHub</a>
         </div>
     </nav>
@@ -47,6 +47,46 @@
             } else {
                 icon.classList.replace('fa-xmark', 'fa-bars');
             }
+        });
+
+        // Active State Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section, .category-section, .hero');
+            const navItems = {
+                'home': document.getElementById('nav-home'),
+                'projects': document.getElementById('nav-projects')
+            };
+
+            // Options for IntersectionObserver
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px', // Trigger when section is near top/middle
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+
+                        // Remove active class from all
+                        Object.values(navItems).forEach(item => {
+                            if (item) item.classList.remove('active');
+                        });
+
+                        // Add active class to current
+                        if (id === 'home' && navItems['home']) {
+                            navItems['home'].classList.add('active');
+                        } else if (id === 'projects' && navItems['projects']) {
+                            navItems['projects'].classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                if (section.id) observer.observe(section);
+            });
         });
     </script>
     {% block scripts %}{% endblock %}
