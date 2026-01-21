@@ -110,7 +110,7 @@
         <div class="carousel-container fade-wrap delay-100 {{ 'view-carousel' if team_projects|length > 3 else 'view-grid' }}"
             id="carousel-team">
             <div class="scrolling-wrapper">
-                {% for project in projects if project.category == 'Team Project' %}
+                {% for project in team_projects %}
                 <a href="{{ url_for('project_detail', project_id=project.id) }}" class="card">
                     <div class="card-type">{{ project.type }}</div>
                     <h3>{{ project.title }}</h3>
@@ -143,7 +143,7 @@
         <div class="carousel-container fade-wrap delay-100 {{ 'view-carousel' if personal_projects|length > 3 else 'view-grid' }}"
             id="carousel-personal">
             <div class="scrolling-wrapper">
-                {% for project in projects if project.category == 'Personal Work' %}
+                {% for project in personal_projects %}
                 <a href="{{ url_for('project_detail', project_id=project.id) }}" class="card">
                     <div class="card-type">{{ project.type }}</div>
                     <h3>{{ project.title }}</h3>
