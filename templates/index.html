@@ -99,38 +99,56 @@
     <div class="category-section" style="margin-bottom: 4rem;" id="projects">
         <h3 style="border-left: 4px solid var(--accent-color); padding-left: 1rem; margin-bottom: 2rem;">Team Projects
         </h3>
-        <div class="grid">
-            {% for project in projects if project.category == 'Team Project' %}
-            <a href="{{ url_for('project_detail', project_id=project.id) }}" class="card">
-                <div class="card-type">{{ project.type }}</div>
-                <h3>{{ project.title }}</h3>
-                <p>{{ project.summary }}</p>
-                <div class="tech-tags">
-                    {% for tech in project.tech_list %}
-                    <span class="tag">{{ tech }}</span>
-                    {% endfor %}
+        <div class="carousel-container" id="carousel-team">
+            <div class="scrolling-wrapper">
+                {% for project in projects if project.category == 'Team Project' %}
+                <a href="{{ url_for('project_detail', project_id=project.id) }}" class="card">
+                    <div class="card-type">{{ project.type }}</div>
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.summary }}</p>
+                    <div class="tech-tags">
+                        {% for tech in project.tech_list %}
+                        <span class="tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="carousel-controls">
+                <button class="scroll-btn prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="scroll-progress-track">
+                    <div class="scroll-progress-bar"></div>
                 </div>
-            </a>
-            {% endfor %}
+                <button class="scroll-btn next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
         </div>
     </div>
 
     <div class="category-section">
         <h3 style="border-left: 4px solid var(--accent-color); padding-left: 1rem; margin-bottom: 2rem;">Personal Work
         </h3>
-        <div class="grid">
-            {% for project in projects if project.category == 'Personal Work' %}
-            <a href="{{ url_for('project_detail', project_id=project.id) }}" class="card">
-                <div class="card-type">{{ project.type }}</div>
-                <h3>{{ project.title }}</h3>
-                <p>{{ project.summary }}</p>
-                <div class="tech-tags">
-                    {% for tech in project.tech_list %}
-                    <span class="tag">{{ tech }}</span>
-                    {% endfor %}
+        <div class="carousel-container" id="carousel-personal">
+            <div class="scrolling-wrapper">
+                {% for project in projects if project.category == 'Personal Work' %}
+                <a href="{{ url_for('project_detail', project_id=project.id) }}" class="card">
+                    <div class="card-type">{{ project.type }}</div>
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.summary }}</p>
+                    <div class="tech-tags">
+                        {% for tech in project.tech_list %}
+                        <span class="tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="carousel-controls">
+                <button class="scroll-btn prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="scroll-progress-track">
+                    <div class="scroll-progress-bar"></div>
                 </div>
-            </a>
-            {% endfor %}
+                <button class="scroll-btn next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
         </div>
     </div>
 </section>

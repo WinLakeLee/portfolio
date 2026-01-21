@@ -87,6 +87,60 @@
             sections.forEach(section => {
                 if (section.id) observer.observe(section);
             });
+
+            // Carousel Logic
+            const carousels = document.querySelectorAll('.carousel-container');
+
+            carousels.forEach(carousel => {
+                const wrapper = carousel.querySelector('.scrolling-wrapper');
+                const progressBar = carousel.querySelector('.scroll-progress-bar');
+                const prevBtn = carousel.querySelector('.prev');
+                const nextBtn = carousel.querySelector('.next');
+
+                if (!wrapper || !progressBar || !prevBtn || !nextBtn) return;
+
+                // Update Progress Bar
+                const updateProgress = () => {
+                    const scrollLeft = wrapper.scrollLeft;
+                    const scrollWidth = wrapper.scrollWidth;
+                    const clientWidth = wrapper.clientWidth;
+                    const maxScroll = scrollWidth - clientWidth;
+
+                    if (maxScroll > 0) {
+                        const widthPercentage = (scrollLeft / maxScroll) * 100;
+                        progressBar.style.width = `${Math.min(100, Math.max(0, widthPercentage))}%`;
+                    }
+                };
+
+                wrapper.addEventListener('scroll', updateProgress);
+                // Initial update
+                updateProgress();
+                // Update on resize
+                window.addEventListener('resize', updateProgress);
+
+                // Navigation with Circular Logic
+                const scrollAmount = 350 + 32; // card width + gap (approx)
+
+                nextBtn.addEventListener('click', () => {
+                    const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+                    // Tolerance for floating point calculation
+                    if (wrapper.scrollLeft >= maxScroll - 5) {
+                        // Loop to start
+                        wrapper.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        wrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    }
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    if (wrapper.scrollLeft <= 5) {
+                        // Loop to end
+                        wrapper.scrollTo({ left: wrapper.scrollWidth, behavior: 'smooth' });
+                    } else {
+                        wrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    }
+                });
+            });
         });
     </script>
     {% block scripts %}{% endblock %}
