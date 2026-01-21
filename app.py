@@ -21,8 +21,15 @@ def inject_metadata():
 @app.route("/")
 def home():
     projects = get_all_projects_summary()
+    team_projects = [p for p in projects if p["category"] == "Team Project"]
+    personal_projects = [p for p in projects if p["category"] == "Personal Work"]
     profile = get_profile_data()
-    return render_template("index.html", projects=projects, profile=profile)
+    return render_template(
+        "index.html",
+        team_projects=team_projects,
+        personal_projects=personal_projects,
+        profile=profile,
+    )
 
 
 @app.route("/projects")

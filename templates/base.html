@@ -35,6 +35,16 @@
         <p>&copy; 2024 {{ developer_name }}. All rights reserved.</p>
     </footer>
 
+    <!-- Floating Action Buttons -->
+    <div class="fab-container" id="fabContainer">
+        <button class="fab-btn secondary" id="scrollToTop" aria-label="맨 위로">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+        <button class="fab-btn" id="scrollToBottom" aria-label="맨 아래로">
+            <i class="fa-solid fa-arrow-down"></i>
+        </button>
+    </div>
+
     <script>
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.getElementById('navLinks');
@@ -141,6 +151,79 @@
                     }
                 });
             });
+
+            // View Toggle Logic
+            const toggleBtns = document.querySelectorAll('.view-toggle-btn');
+            toggleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.getAttribute('data-target');
+                    const targetContainer = document.getElementById(targetId);
+
+                    if (targetContainer) {
+                        if (targetContainer.classList.contains('view-grid')) {
+                            targetContainer.classList.replace('view-grid', 'view-carousel');
+                        } else {
+                            targetContainer.classList.replace('view-carousel', 'view-grid');
+                        }
+                    }
+                });
+            });
+
+            // FAB Logic
+            const fabContainer = document.getElementById('fabContainer');
+            const scrollTopBtn = document.getElementById('scrollToTop');
+            const scrollBottomBtn = document.getElementById('scrollToBottom');
+
+            // Initial check
+            const updateFabVisibility = () => {
+                const scrollY = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+
+                // Hide Up button if at top
+                if (scrollY < 100) {
+                    scrollTopBtn.classList.add('hidden');
+                } else {
+                    scrollTopBtn.classList.remove('hidden');
+                }
+
+                // Hide Down button if at bottom
+                if (scrollY + windowHeight >= documentHeight - 100) {
+                    scrollBottomBtn.classList.add('hidden');
+                } else {
+                    scrollBottomBtn.classList.remove('hidden');
+                }
+            };
+
+            window.addEventListener('scroll', updateFabVisibility);
+            // Call once to set initial state
+            updateFabVisibility();
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            scrollBottomBtn.addEventListener('click', () => {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            });
+
+            // Scroll Animations Observer
+            const fadeObserverOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const fadeObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, fadeObserverOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-wrap');
+            fadeElements.forEach(el => fadeObserver.observe(el));
         });
     </script>
     {% block scripts %}{% endblock %}
