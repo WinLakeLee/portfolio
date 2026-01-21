@@ -31,7 +31,7 @@
     {% if project.contribution_points %}
     <section style="margin-top: 4rem;">
         <h2>주요 기여 사항 (Key Contributions)</h2>
-        <div class="contribution-grid">
+        <div class="contribution-grid" style="margin-top: 1.5rem;">
             {% for item in project.contribution_points %}
             <div class="contribution-card">
                 <div class="contribution-title">{{ item.title }}</div>
@@ -44,9 +44,8 @@
 
     <section style="margin-top: 4rem;">
         <h2>프로젝트 소개 (About Project)</h2>
-        <div style="white-space: pre-line; margin-top: 1.5rem; color: #cbd5e1; line-height: 1.8;">
-            {{ project.details | safe }}
-        </div>
+        <div style="white-space: pre-line; margin-top: 1rem; color: #cbd5e1; line-height: 1.6;">{{
+            project.details.strip() | safe }}</div>
     </section>
 
     {% if project.role or project.lessons or project.improvements %}
@@ -81,7 +80,7 @@
 
         <section style="margin-top: 4rem;">
             <h2>주요 기능 (Key Features)</h2>
-            <div class="feature-list">
+            <div class="feature-list" style="margin-top: 1.5rem;">
                 {% for feature in project.features %}
                 <div class="feature-item">
                     <h3>{{ feature.name }}</h3>
@@ -93,7 +92,7 @@
 
         <section style="margin-top: 4rem;">
             <h2>기술 스택 (Technical Stack)</h2>
-            <div class="tech-stack-grid">
+            <div class="tech-stack-grid" style="margin-top: 1.5rem;">
                 {% for category, techs in project.tech_stack.items() %}
                 <div class="tech-category">
                     <h4>{{ category }}</h4>
